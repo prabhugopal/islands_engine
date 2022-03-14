@@ -6,7 +6,6 @@ defmodule IslandsEngine.Board do
   def overlaps?(existing_island, new_island), do:
     not MapSet.disjoint?(existing_island.coordinates, new_island.coordinates)
 
-  def types(), do: [:atoll, :dot, :l_shape, :s_shape, :square]
 
   def position_island(board, key, %Island{} = island) do
     case overlaps_existing_island?(board, key, island) do
@@ -21,6 +20,7 @@ defmodule IslandsEngine.Board do
     end)
   end
 
+  @spec all_islands_positioned?(any) :: boolean
   def all_islands_positioned?(board), do:
     Enum.all?(Island.types, &(Map.has_key?(board, &1)))
 
